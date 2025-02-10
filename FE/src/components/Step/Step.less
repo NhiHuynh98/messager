@@ -1,0 +1,40 @@
+@import url("../../themes/tokens.less");
+
+.custom-step {
+  .ant-steps-item-process .ant-steps-item-icon {
+    background-color: @color-bg-surface-brown;
+    border-color: @color-border-brown;
+  }
+  .ant-steps-item-container:hover {
+    .ant-steps-item-icon {
+      border-color: @color-border-brown !important;
+      background-color: @color-bg-surface-brown;
+      .ant-steps-icon {
+        color: @color-text !important;
+      }
+      svg {
+        color: @color-icon-white;
+      }
+    }
+    .ant-steps-item-title {
+      color: @color-black !important;
+      
+    }
+  }
+  .ant-steps-item-finish .ant-steps-item-icon {
+    border-color: @color-border-brown !important;
+    background-color: @color-bg-surface-brown;
+    .ant-steps-icon {
+        color: @color-text !important;
+      }
+    svg {
+        color: @color-icon-white;
+      }
+  }
+  .ant-steps-item-title {
+    &::after {
+        background-color:  @color-bg-surface-brown !important;
+        height: 2px;
+    }
+  }
+}

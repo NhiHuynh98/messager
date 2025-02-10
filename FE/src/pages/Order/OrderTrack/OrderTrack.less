@@ -1,0 +1,23 @@
+@import url("../../../themes/tokens.less");
+
+.step-box {
+  border-radius: @border-radius-base;
+  background-color: @color-black;
+  padding: @spacing-2 @spacing-7;
+  color: @color-text;
+}
+.step-box-disabled {
+    background-color: @color-bg-disabled;
+}
+.ant-timeline .ant-timeline-item-last >.ant-timeline-item-content {
+        min-height: unset !important;
+}
+
+.ant-timeline .ant-timeline-item:last-child {
+    padding-bottom: unset;
+}
+.ant-timeline-item-head {
+    svg {
+        color: @color-text-disable;
+    }
+}

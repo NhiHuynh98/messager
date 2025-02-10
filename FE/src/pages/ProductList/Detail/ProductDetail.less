@@ -1,0 +1,118 @@
+@import url("../../../themes/tokens.less");
+
+.product-detail {
+  display: flex;
+  flex-direction: column;
+  gap: @spacing-4;
+  .product-image {
+    width: 213px;
+    height: 213px;
+    border-radius: 50%;
+    border: 3px solid @color-border-image;
+    box-shadow: @size-4 @size-4 @size-10 0px #00000026;
+  }
+  .product-body {
+    background-color: @color-bg;
+    padding: @spacing-10;
+    height: 100%;
+  }
+
+  .product-type {
+    display: flex;
+    gap: @spacing-3;
+    color: @color-text;
+    .rcn {
+      background-color: @color-bg-surface-brown;
+      padding: @spacing-basis;
+      border-radius: @border-radius-small;
+      box-shadow: 2px 4px 4px 0px #00000040;
+    }
+    .kernels {
+      background-color: @color-black;
+      padding: @spacing-basis;
+      border-radius: @border-radius-small;
+      box-shadow: 2px 4px 4px 0px #00000040;
+    }
+  }
+  .product-name {
+    background-color: @color-bg-input;
+    padding: @spacing-2;
+    font-size: @size-32;
+    color: @color-text-label;
+    font-weight: @font-weight-medium;
+    width: 324px;
+    border-radius: @border-radius-base;
+  }
+
+  .product-info {
+    font-size: @size-16;
+    display: flex;
+    gap: @spacing-6;
+    .title {
+      font-weight: @font-weight-bold;
+      color: @color-text-label;
+    }
+    .content {
+      color: @color-text-disable;
+      justify-content: space-between;
+      gap: 50px;
+      align-items: center;
+      .ant-select {
+        min-width: 158px;
+      }
+    }
+  }
+  .product-total {
+    display: flex;
+    gap: @spacing-6;
+    .btn-calculate {
+      min-width: 158px;
+      height: 34px;
+      display: flex;
+      justify-content: space-between;
+      color: @color-progress-text;
+      padding: @spacing-2;
+      border: 1px solid @color-border;
+      border-radius: @border-radius-base;
+      svg {
+        cursor: pointer;
+      }
+    }
+
+    .left {
+      display: flex;
+      flex-direction: column;
+      gap: @spacing-6;
+    }
+    .right {
+      border: 1px solid @color-border;
+      border-radius: @border-radius-base;
+      padding: @spacing-2;
+      min-width: 206px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      span:first-child {
+        color: @color-brown;
+        font-size: @size-20;
+        font-weight: @font-weight-bold;
+      }
+    }
+  }
+  .ant-input {
+    max-width: 324px;
+  }
+
+  .product-action {
+    margin-top: @spacing-6;
+    .ant-btn:first-child {
+      background-color: @color-black;
+    color: @color-text;
+    &:hover {
+      background-color: @color-black !important;
+      color: @color-text !important;
+      border-color: unset;
+    }
+  }
+  }
+}

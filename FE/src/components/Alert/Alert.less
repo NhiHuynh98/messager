@@ -1,0 +1,36 @@
+@import url("../../themes/tokens.less");
+
+.ant-alert {
+  height: 68px;
+  padding: @spacing-2 @spacing-3;
+  svg {
+    width: @size-20;
+    height: @size-20;
+  }
+  .ant-alert-message {
+    font-weight: @font-weight-bold;
+    font-size: @size-14;
+    line-height: 24px;
+    color: @color-text-title;
+    margin-bottom: unset;
+  }
+
+  .ant-alert-description {
+    font-weight: @font-weight-regular;
+    font-size: @size-14;
+    line-height: 24px;
+    color: @color-text-disable;
+  }
+}
+.ant-alert-error {
+  border-left: 10px solid rgba(220, 0, 25, 0.5);
+  background-color: rgba(220, 0, 25, 0.15);
+}
+
+.ant-alert-close-icon {
+  svg {
+    color: @color-bg-surface-red;
+    width: @size-14;
+    height: @size-14;
+  }
+}

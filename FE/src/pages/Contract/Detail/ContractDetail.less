@@ -1,0 +1,42 @@
+@import url("../../../themes/tokens.less");
+
+.contract-detail {
+  .contract-title {
+    font-size: @size-24;
+    color: @color-text-label;
+    font-weight: @font-weight-bold;
+    margin-top: @spacing-6;
+    .contract-id {
+      font-weight: @font-weight-regular;
+    }
+  }
+  .contract-detail-info {
+    padding: 30px 70px;
+    background-color: @color-bg;
+    height: 100%;
+    width: 80%;
+  }
+  .content {
+    color: @color-text-disable;
+    justify-content: space-between;
+    gap: 50px;
+    align-items: center;
+    width: 35%;
+    .select-custom {
+      min-width: 50%;
+    }
+    .btn-calculate {
+      min-width: 50%;
+      height: 34px;
+      display: flex;
+      justify-content: space-between;
+      color: @color-progress-text;
+      padding: @spacing-2;
+      border: 1px solid @color-border;
+      border-radius: @border-radius-base;
+    }
+  }
+  .name {
+    min-width: @size-20 * 10;
+  }
+}

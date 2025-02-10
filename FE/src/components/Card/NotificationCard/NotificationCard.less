@@ -1,0 +1,35 @@
+@import url('../../../themes/tokens.less');
+
+.noti-card {
+    display: flex;
+    gap: @spacing-3;
+    align-items: flex-start;
+    border: 1px solid @color-border-thead-table;
+    border-radius: @border-radius-small;
+    padding: @spacing-2;
+    .left-side {
+        .anticon {
+            svg {
+                width: @size-20;
+                height: @size-20;
+            }
+        }
+    }
+    .right-side {
+        display: flex;
+        flex-direction: column;
+        gap: @spacing-1;
+    }
+    .right-side > span:first-child{
+        color: @color-card-title;
+        font-weight: @font-weight-bold;
+        font-size: @size-14;
+        line-height: 24px;
+    }
+    .right-side > span:last-child{
+        color: @color-text-subtitle;
+        font-weight: @font-weight-regular;
+        font-size: @size-14;
+        line-height: 24px;
+    }
+}

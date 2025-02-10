@@ -1,0 +1,105 @@
+@import url("../../themes/tokens.less");
+
+.banner {
+    background-color: @color-bg-banner;
+    padding: @spacing-3 0;
+    .banner-content {
+        display: flex;
+        flex-direction: column;
+        gap: @spacing-2;
+        align-items: center;
+        h3 {
+            z-index: 2;
+        color: @color-text;
+
+        }
+        
+        
+    }
+}
+
+.banner {
+  position: relative;
+  height: 100px;
+  overflow: hidden;
+  border-radius: @border-radius-base;
+}
+
+.banner::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: -95px;
+  background-image: url('../../assets/img/banner.png');
+  background-size: auto;
+  background-repeat: no-repeat;
+  background-position: bottom;
+  opacity: 0.3; /* Set image opacity to 30% */
+  z-index: 1; /* Ensures it is above the background color */
+}
+
+.border-card {
+    border: 0.5px solid @color-border;
+    background-color: @color-bg;
+    border-radius: @border-radius-base;
+    padding: @spacing-3;
+}
+
+.sections {
+    display: flex;
+    flex-direction: column;
+    gap: @spacing-5;
+    margin-top: @spacing-5;
+}
+
+.right-bottom {
+    display: flex;
+    flex-direction: column;
+    gap: @spacing-3;
+    border: 0.5px solid @color-border;
+    background-color: @color-bg;
+    border-radius: @border-radius-base;
+    padding: @spacing-5 @spacing-5;
+    span:first-child {
+        font-size: @size-16;
+        color: @color-text-title;
+        font-weight: @font-weight-bold;
+    }
+}
+
+.right-top {
+    display: flex;
+    background-color: @color-bg;
+    justify-content: space-around;
+    
+    border: 0.5px solid @color-border;
+    background-color: @color-bg;
+    border-radius: @border-radius-base;
+    padding: @spacing-5 @spacing-5;
+
+    .shortcut-item {
+        align-items: center;
+        display: flex;
+        flex-direction: column;
+        gap: @spacing-3;
+    }
+
+    .icon {
+        border-radius: 50%;
+        background-color: @color-bg-surface-brown;
+        width: 54px;
+        height: 54px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        svg {
+            width: 100%;
+            color: @color-bg;
+            width: 30px;
+            height: 30px;
+        }
+    }
+}

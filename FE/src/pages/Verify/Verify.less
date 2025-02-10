@@ -1,0 +1,78 @@
+@import url("../../themes/tokens.less");
+
+.verification {
+  .verify-steps {
+    padding: @spacing-5 @spacing-9 * 10;
+  }
+
+  .verify-title {
+    font-size: @size-20;
+    font-weight: @font-weight-bold;
+    color: @color-text-disable;
+  }
+
+  .document-file-attach {
+    border: 1px dashed @color-brown;
+    padding: @spacing-3;
+    margin: auto;
+  }
+  .verify-body {
+    background-color: @color-bg;
+    padding: @spacing-5;
+  }
+  .upload-document-content {
+    .sub-title {
+      text-align: center;
+    }
+    .sub-child-title {
+      text-align: center;
+      font-size: @size-14;
+      color: @color-progress-text;
+    }
+  }
+
+  .file-format-accepted {
+    font-size: @size-14;
+    font-weight: @font-weight-regular;
+    font-style: italic;
+    color: @color-progress-text;
+    text-align: center;
+    .highlight {
+      color: @color-text-disable;
+    }
+  }
+
+  .btn-submit {
+    width: 40%;
+    margin: auto;
+    margin-top: 10px;
+    span:first-child {
+      font-weight: @font-weight-medium;
+    }
+  }
+
+  .content {
+    padding-left: @spacing-5;
+  }
+
+  .condition-check {
+    margin-top: 300px;
+  }
+
+  .icon-exclamanation {
+    width: 20px;
+    height: 20px;
+    border: 0.5px solid @color-border;
+    border-radius: 50%;
+    min-width: 20px;
+    svg {
+      width: @size-12;
+      height: @size-12;
+      color: @color-icon;
+    }
+  }
+  .more {
+    color: @color-brown;
+    font-weight: @font-weight-bold;
+  }
+}

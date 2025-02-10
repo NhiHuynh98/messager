@@ -1,0 +1,28 @@
+@import url("../../themes/tokens.less");
+
+.custom-card {
+  border: 0.5px solid @color-border;
+  background-color: @color-bg;
+  padding: @spacing-4;
+  .ant-card-head {
+    border-bottom: unset;
+    &::after {
+      bottom: 0;
+      height: 1px;
+      width: 100%;
+      border-bottom: 1px solid @color-border;
+      padding: @spacing-2 0;
+    }
+  }
+
+  .ant-card-head-title {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+  }
+
+  .ant-card-body {
+    padding: @spacing-6;
+  }
+
+}

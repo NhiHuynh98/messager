@@ -1,0 +1,46 @@
+@import url('../../themes/tokens.less');
+
+.custom-tabs-card {
+    .ant-tabs-tab {
+        border: unset !important;
+        color: @color-progress-text !important;
+        background-color: @color-bg-surface-disabled !important;
+        font-size: @size-16 !important;
+    }
+    .ant-tabs-tab.ant-tabs-tab-active {
+        font-size: @size-16;
+        font-weight: @font-weight-bold;
+        line-height: 18.75px;
+        background: @color-bg !important;
+         color: @color-text-subtitle !important;
+        .ant-tabs-tab-btn {
+            color: @color-text-subtitle !important;
+        }
+    }
+    .ant-tabs-nav-list {
+        gap: @spacing-3;
+    }
+    
+}
+
+.custom-tabs {
+    .ant-tabs-tab {
+        border: unset !important;
+        color: @color-progress-text !important;
+        font-size: @size-16 !important;
+    }
+    .ant-tabs-tab.ant-tabs-tab-active {
+        font-size: @size-16;
+        font-weight: @font-weight-bold;
+        line-height: 18.75px;
+        .ant-tabs-tab-btn {
+            color: @color-card-title !important;
+        }
+    }
+    .ant-tabs-ink-bar {
+        background: @color-border-card !important;    
+    }
+    .ant-tabs-nav-list {
+        gap: @spacing-3;
+    }
+}

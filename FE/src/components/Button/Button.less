@@ -1,0 +1,49 @@
+@import url("../../themes/tokens.less");
+
+.custom-button {
+    .ant-btn {
+        border-radius: @border-radius-base;
+        font-size: @size-16;
+        &:hover {
+            color: unset;
+            border-color: unset;
+            background-color: unset;
+        }
+    }
+}
+
+.custom-button-primary {
+    background-color: #007bff;
+    color: white;
+    border: none;
+}
+
+.custom-button-default {
+    color: black;
+    border: 1px solid #d9d9d9;
+}
+
+.custom-button-dashed {
+    background-color: white;
+    color: black;
+    border: 1px dashed #d9d9d9;
+}
+
+.custom-button-danger {
+    background-color: #ff4d4f;
+    color: white;
+    border: none;
+}
+
+.custom-button-link {
+    background-color: transparent;
+    color: #1890ff;
+    border: none;
+}
+
+.custom-button-action {
+    color: @color-text;
+    border: 1px solid @color-black;
+    background-color: @color-black;
+    border-radius: @border-radius-base;
+}

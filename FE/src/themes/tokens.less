@@ -1,0 +1,375 @@
+// Spacing
+@spacing-basis: 4px;
+@spacing-0: 0;
+@spacing-1: @spacing-basis;
+@spacing-2: @spacing-basis * 2;
+@spacing-3: @spacing-basis * 3;
+@spacing-4: @spacing-basis * 4;
+@spacing-5: @spacing-basis * 5;
+@spacing-6: @spacing-basis * 6;
+@spacing-7: @spacing-basis * 7;
+@spacing-8: @spacing-basis * 8;
+@spacing-9: @spacing-basis * 9;
+@spacing-10: @spacing-basis * 10;
+@spacing-11: @spacing-basis * 11;
+@spacing-12: @spacing-basis * 12;
+
+// Primary
+
+@color-primary-dark: #0558b8;
+@color-primary-main: #0968d2;
+@color-primary-sub: #318ff6;
+@color-primary-light: #9dc9fb;
+@color-primary-lighter: #e6f2ff;
+@color-primary: @color-primary-main;
+
+// Secondary 1
+@color-secondary1-dark: #955104;
+@color-secondary1-main: #fc8803;
+@color-secondary1-sub: #ffa53d;
+@color-secondary1-light: #fecf9a;
+@color-secondary1-lighter: #ffecd6;
+@color-secondary1: @color-secondary1-main;
+
+// Secondary 2
+
+@color-secondary2-dark: #136c31;
+@color-secondary2-main: #29a352;
+@color-secondary2-sub: #47d175;
+@color-secondary2-light: #99e5b2;
+@color-secondary2-lighter: #e0fae9;
+@color-secondary2: @color-secondary2-main;
+
+// Secondary 3
+
+@color-secondary3-dark: #8a6e00;
+@color-secondary3-main: #cfb917;
+@color-secondary3-sub: #ebd847;
+@color-secondary3-light: #f5eba3;
+@color-secondary3-lighter: #fef9cc;
+@color-secondary3: @color-secondary3-main;
+
+// Secondary 4
+@color-secondary4-dark: #652f8e;
+@color-secondary4-main: #9c59cf;
+@color-secondary4-sub: #b381da;
+@color-secondary4-light: #d0b0e8;
+@color-secondary4-lighter: #f3eafb;
+@color-secondary4: @color-secondary4-main;
+
+@color-error-main: #e83f30;
+@color-error-lighter: #ffe8e5;
+
+// brown
+@color-brown-dark: @color-brown;
+
+//black
+@color-black: #242E35;
+
+//green
+@color-green: #00A060;
+
+// Background
+@color-background: rgba(255, 255, 255, 1);
+
+@color-foreground: rgba(255, 255, 255, 1);
+@color-grey-light1: rgba(192, 203, 216, 0.12);
+// @color-grey-light1: rgba(#c0cbd8, 0.12);
+@color-grey-light1-white: mix(#c0cbd8, #fff, 12%); // Blend with white
+@color-grey-light2: rgba(192, 203, 216, 0.24);
+@color-overlay: rgba(22, 28, 36, 0.6);
+@color-gray-trans: #c0cbd87a;
+@color-white-trans32: rgba(255, 255, 255, 0.32);
+@color-white-trans64: rgba(255, 255, 255, 0.64);
+@color-white-trans24: rgba(255, 255, 255, 0.24);
+@color-inverse: rgba(22, 29, 36, 1);
+@color-white-trans32: rgba(255, 255, 255, 0.32);
+@color-white-trans64: rgba(255, 255, 255, 0.64);
+@color-white-trans24: rgba(255, 255, 255, 0.24);
+// 161C24
+// 32%
+// Placeholder
+// 161C24
+// 44%
+// Subtitle
+// 161C24
+// 60%
+// Body
+// 161C24
+// 85%
+// Label
+// 161C24
+// 90%
+// Title
+// 161C24
+// 100%
+
+// Typeography
+
+@color-text-disable: #545D5C;
+@color-text-placeholder:rgba(22, 28, 36, 0.44);
+@color-text-subtitle: #545D5C;;
+@color-text-body: rgba(22, 28, 36, 0.85);
+@color-text-label: #000000;
+@color-text-title: #000000;
+@color-text: #FFFFFF;
+@color-card-title: #B98D58;
+@color-progress-text: #909090;
+
+// Border
+
+@color-border: #E5E5E5;
+@color-border-brown: #B98D58;
+@border-radius-base: @size-6;
+@border-radius-small: @size-6;
+@color-border-button: #909090;
+@color-border-card: #B98D58;
+@color-border-image: #FFFFFF;
+@color-border-thead-table: #909090;
+@color-border-confirm: #545D5C;
+
+@color-divider: #F9F8F4;
+
+@color-error: rgba(232, 63, 48, 1);
+@color-icon: #909090;
+@color-icon-brown: #B98D58;
+@color-icon-white: #FFFFFF;
+
+// NEW DESIGN TOKENS
+
+
+@import './tokens/colors.less';
+
+// TEXT COLOR PALETTES
+
+
+@color-button: @color-primary-main; // Màu của text button
+@color-text-title: @color-base-neutral-10; // Màu của tiêu đề
+@color-text-primary: @color-base-neutral-9; // Màu mặc định của text
+@color-text-secondary: @color-base-neutral-7; // Màu của text phụ
+@color-text-active: @color-brand-6; // Màu của text ở trạng thái active
+@color-text-active-menu: @color-brand-6; // Màu của text menu ở trạng thái active
+@color-text-hint: @color-base-neutral-5; // Màu của text hint
+@color-text-disabled: @color-base-neutral-4; // Màu của text disabled
+
+@color-text-inverse-title: @color-base-neutral-1; // màu của tiêu đề trên nền bg-inverse
+@color-text-inverse-primary: @color-base-neutral-2; // Màu mặc định của text trên nền bg-inverse
+@color-text-inverse-secondary: @color-base-neutral-4; // màu text phụ trên nền bg-inverse
+@color-text-inverse-label: @color-base-neutral-5; // Màu của tiêu đề hộp văn bản trên nền bg-inverse
+@color-text-inverse-hint: @color-base-neutral-6; // Màu của text hỗ trợ trên nền bg-inverse
+
+@color-text-info: @color-primary-main; // màu của text info
+@color-text-success: @color-success-primary; // màu của text success
+@color-text-warning: @color-base-orange-6; // màu của text warning
+@color-text-error: @color-danger-primary; // màu của text error
+
+@color-text-link: @color-primary-main; // màu của text link
+@color-text-link-hover: @color-primary-dark; // màu của text link trạng thái hover
+@color-text-link-pressed: @color-primary-dark; // màu của text link trạng thái pressed
+@color-text-link-disabled: @color-base-neutral-4; // màu của text link trạng thái disabled
+
+// ICON COLOR PALETTES
+@color-icon-header: @color-blue-gray;
+
+@color-icon-primary: @color-primary-main; // màu của icon chính
+@color-icon-hover: @color-primary-dark; // Màu  của icon  ở trạng thái hover
+@color-icon-active: @color-primary-main; // Màu  của icon  ở trạng thái active
+@color-icon-pressed: @color-primary-dark; // Màu  của icon  ở trạng thái pressed
+@color-icon-secondary: @color-base-neutral-6; // Màu của icon sencondary
+@color-icon-secondary-hover: @color-base-neutral-7; // Màu của icon sencondary ở trạng thái hover
+@color-icon-secondary-pressed: @color-base-neutral-6; // Màu của icon sencondary ở trạng thái pressedx
+@color-icon-label: @color-base-neutral-5; // Màu của icon label
+@color-icon-disabled: @color-base-neutral-6; // Màu của icon disabled
+
+@color-icon-inverse: @color-base-neutral-1; // màu của icon đặt trên nền bg inverse
+@color-icon-inverse-hover: @color-base-neutral-2; // màu của icon đặt trên nền bg inverse trạng thái hover
+@color-icon-inverse-secondary: @color-base-neutral-3; // màu của icon đặt trên nền bg inverse trạng thái active
+@color-icon-inverse-label: @color-base-neutral-5; // màu của icon  label đặt trên nền bg inverse
+@color-icon-inverse-disabled: @color-base-neutral-6; // màu của icon  disabled đặt trên nền bg inverse
+
+@color-icon-info: @color-primary-main; // màu của icon thông tin
+@color-icon-success: @color-success-primary; // màu của icon thành công
+@color-icon-warning: @color-warning-primary; // màu của icon cảnh báo
+@color-icon-error: @color-danger-primary; // màu của icon báo lỗi
+
+// BORDER COLOR PALETTES
+
+@color-border: @color-base-neutral-4; // màu mặc định của border (input, button secondary, divider chính)
+@color-border-secondary: @color-base-neutral-3; // màu của border phụ (divider trong table)
+@color-border-disabled: @color-base-neutral-2; // màu border của những element disabled
+@color-border-active: @color-primary-main; // màu border của những element active
+@color-border-destructive: @color-danger-primary; // màu border của những element destructive
+@color-border-inverse: @color-base-neutral-4; // màu mặc định của border ( input, button secondary, divider chính) trên nền bg-inverse
+@color-border-inverse-secondary: @color-base-neutral-3; // màu của border phụ (divider trong table) trên nền bg-inverse
+@color-border-inverse-disabled: @color-base-neutral-2; // màu border của những element disabled trên nền bg-inverse
+@color-border-info: @color-primary-main; // màu border của những component cung cấp thông tin (banner, tag)
+@color-border-success: @color-success-primary; // màu border của những component thành công
+@color-border-warning: @color-warning-primary; // màu border của những component cảnh báo
+@color-border-error: @color-danger-primary; // màu border của những component báo lỗi
+@color-border-button-secondary: @color-primary-main; // màu border của button cấp 2
+@color-border-button-secondary-hover: @color-primary-dark; // màu border của button cấp 2 ở trạng thái hover
+@color-border-button-secondary-pressed: @color-primary-dark; // màu border của button cấp 2 ở trạng thái pressed
+@color-border-button-secondary-disabled: @color-base-neutral-2; // màu border của button cấp 2 ở trạng thái disabled
+// TODO: Not yet defined border tokens
+@color-border-active-focus: rgba(
+  7,
+  126,
+  218,
+  0.25
+); // màu border của button cấp 2 ở trạng thái disabled
+@color-border-error-focus: rgba(
+  244,
+  67,
+  54,
+  0.25
+); // màu border của button cấp 2 ở trạng thái disabled
+
+// BACKGROUND COLOR PALETTES
+@color-bg-surface-brown: @color-brown;
+@color-bg-surface: @color-illustration-neutral-1;
+@color-bg-surface-blue: @color-illustration-royal_blue-8;
+@color-bg-surface-red: @color-danger-1;
+@color-bg-surface-disabled: @color-illustration-neutral-8;
+@color-bg-message-incoming: @color-blue-gray;
+@color-bg-message-sent: @color-gray-1;
+@color-bg-banner: @color-brown;
+@color-bg-input: @color-gray-1;
+@color-bg-disabled: @color-disabled;
+
+
+@color-bg: @color-base-neutral-white; // màu nền mặc định
+@color-bg-inverse: @color-base-neutral-7; // màu nền mặc định cần độ tương phản cao
+@color-bg-surface: @color-base-neutral-white; // màu nền của element hiển thị ở mức độ ưu tiên cao nhất (ví dụ như 1 card)
+@color-bg-surface-hover: @color-base-neutral-2; // trạng thái hover của element
+@color-bg-surface-active: @color-brand-1; // trạng thái active của element
+// @color-bg-surface-disabled: @color-base-neutral-2; // trạng thái disabled của element
+@color-bg-surface-inverse: @color-base-neutral-10; // màu nền của element cần độ tương phản cao (menu)
+@color-bg-surface-secondary: @color-base-neutral-2; // màu nền của element hiển thị ở mức độ ưu tiên phụ cấp 2 (ví dụ như tab, menu bảng)
+@color-bg-surface-menu-table: @color-brand-1; // màu nền của menu table
+@color-bg-surface-info: @color-lighter; // màu nền của các element cung cấp thông tin quan trọng (VD: banner)
+@color-bg-surface-info-fill: @color-primary; // màu nền đặc của các element cung cấp thông tin quan trọng
+@color-bg-surface-success: @color-secondary-2-lighter; // màu nền của các element cung cấp thông tin thành công (VD: banner)
+@color-bg-surface-success-fill: @color-secondary-2-primary; // màu nền đặc của các element cung cấp thông tin thành công
+@color-bg-surface-warning: @color-secondary-1-lighter; // màu nền của các element cung cấp thông tin cảnh báo (VD: banner)
+@color-bg-surface-warning-fill: @color-secondary-1-primary; // màu nền đặc của các element cung cấp thông tin cảnh báo
+@color-bg-surface-error: @color-danger-lighter; // màu nền của các element cung cấp thông tin báo lỗi (VD: banner)
+@color-bg-surface-error-fill: @color-danger-primary; // màu nền đặc của các element cung cấp thông tin báo lỗi
+@color-bg-button-primary: @color-primary-main; // màu nền của các primary button
+@color-bg-button-primary-hover: @color-primary-dark; // trạng thái hover của các primary button
+@color-bg-button-primary-pressed: @color-primary-dark; // trạng thái pressed của các primary button
+@color-bg-button-primary-disabled: @color-base-neutral-3; // trạng thái disabled của các primary button
+@color-bg-button-text: @color-base-neutral-1; // màu nền của các text button
+@color-bg-button-text-hover: @color-primary-lighter; // trạng thái hover của các text button
+@color-bg-button-text-pressed: @color-primary-lighter; // trạng thái pressed của các text button
+@color-bg-button-text-disabled: @color-base-neutral-3; // trạng thái disabled của các text button
+@color-bg-button-destruction: @color-danger-lighter; // màu nền của các destruction button
+@color-bg-button-destruction-hover: @color-danger-dark; // trạng thái hover của các destruction button
+@color-bg-button-destruction-pressed:  @color-danger-dark; // trạng thái pressed của các destruction button
+@color-bg-button-destruction-disabled: @color-base-neutral-2; // trạng thái disabled của các destruction button
+@color-bg-button-overlay: @color-base-neutral-10; // Màu overlay sử dụng cho mask
+@color-bg-button-overlay-1: @color-base-neutral-10; // Màu overlay 1 sử dụng cho mask
+@color-bg-button-navigation-hover-inverse: @color-base-neutral-white; // trạng thái hover của các button ở navigation có background dark-mode
+
+// Defined color state for button secondary
+
+@color-bg-button-secondary-hover: @color-base-neutral-white; // trạng thái hover của các secondary button
+@color-bg-button-secondary-pressed: @color-base-neutral-white; // trạng thái pressed của các secondary button
+@color-bg-button-secondary-disabled: @color-base-neutral-white; // trạng thái disabled của các secondary button
+// Defined color state for button link
+@color-bg-button-link-hover: @color-base-neutral-2; // trạng thái hover của các link button
+@color-bg-button-link-pressed: @color-base-neutral-2; // trạng thái pressed của các link button
+@color-bg-button-link-disabled: @color-base-neutral-2;
+
+// TODO: Not yet defined color tokens
+@color-overlay: rgba(0, 0, 0, 0.4); // màu overlay
+@color-overlay-1: rgba(0, 0, 0, 0.8); // màu overlay 1
+
+// TYPOGRAPHY
+
+@font-device-desktop: 'Inter', sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
+  'Segoe UI Symbol', 'Noto Color Emoji';
+
+@font-weight-regular: 400;
+@font-weight-medium: 500;
+@font-weight-semibold: 600;
+@font-weight-bold: 700;
+
+// Type Sizes
+
+@font-size-3x-large: 28px;
+@font-size-2x-large: 24px;
+@font-size-x-large: 20px;
+@font-size-large: 18px;
+@font-size-medium: 16px;
+@font-size-base: 14px;
+@font-size-small: 12px;
+@font-size-x-small: 10px;
+
+@font-line-height-3x-large: 36px;
+@font-line-height-2x-large: 32px;
+@font-line-height-x-large: 28px;
+@font-line-height-large: 24px;
+@font-line-height-medium: 24px;
+@font-line-height-base: 20px;
+@font-line-height-small: 16px;
+
+// Size
+
+@size-0: 0;
+@size-1: 1px;
+@size-2: 2px;
+@size-4: 4px;
+@size-6: 6px;
+@size-8: 8px;
+@size-10: 10px;
+@size-12: 12px;
+@size-14: 14px;
+@size-16: 16px;
+@size-20: 20px;
+@size-24: 24px;
+@size-32: 32px;
+@size-40: 40px;
+@size-48: 48px;
+@size-64: 64px;
+@size-80: 80px;
+@size-96: 96px;
+@size-124: 124px;
+
+// Spacing
+@space-action_item-padding: @size-8;
+@space-button-padding: @size-16;
+@space-button_text-padding: @size-4;
+@space-button-group-gap: @size-8;
+@space-card-gap: @size-20;
+@space-card-margin: @size-20;
+@space-dropdown-margin: @size-8;
+@space-input-gap: @size-20;
+@space-input-padding: @size-12;
+@space-table-cell-padding: @size-12;
+@space-tag-padding: @size-8;
+@space-popup-margin: @size-20;
+
+// Border Radius
+@border-radius-small: @size-6;
+@border-radius-action_item: @size-8;
+@border-radius-button: @size-8;
+@border-radius-card: @size-8;
+@border-radius-input: @size-8;
+@border-radius-popup: @size-8;
+@border-radius-tag: @size-32;
+
+@border-width: @size-1;
+@border-tab: @size-2;
+
+// Elevation
+
+@elevation-1: 0 1px 4px 0 rgba(0, 0, 0, 0.2);
+@elevation-2: 0 2px 10px 0 rgba(0, 0, 0, 0.2);
+@elevation-date_and_time_picker: 0 1px 4px 0 rgba(0, 0, 0, 0.25);
+@elevation-tooltips: 0 1px 4px 0 rgba(0, 0, 0, 0.25);
+@elevation-tooltips_arrow: 0 1px 4px 0 rgba(0, 0, 0, 0.25);
+@elevation-tour_guide: 0 1px 4px 0 rgba(0, 0, 0, 0.25);
+@elevation-dropdown: 0 1px 4px 0 rgba(0, 0, 0, 0.25);
+@elevation-popover: 0 2px 10px 0 rgba(0, 0, 0, 0.2);
+@elevation-popup: 0 2px 10px 0 rgba(0, 0, 0, 0.2);
+@elevation-input_focus: 0 0 0 4px rgba(9, 104, 210, 0.25);

@@ -1,0 +1,58 @@
+@import url('../../themes/tokens.less');
+
+.custom-modal {
+    .ant-modal-content {
+        padding: unset !important;
+        height: 450px;
+        width: 600px;
+        .ant-modal-close-x {
+            opacity: 0;
+        }
+    }
+    .ant-modal-header {
+        border: 0.5px solid @color-border-confirm;
+        background: @color-black;
+        height: 44px;
+        margin-bottom: unset;
+        
+        .ant-modal-title {
+            color: @color-text !important;
+            font-size: @size-20;
+            // font-weight: @font-weight-medium;
+            line-height: 23.44px;
+            padding-left: @size-24;
+            display: flex;
+            align-items: center;
+            height: 100%;
+        }
+    }
+    .ant-modal-body {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+    .ant-modal-footer {
+        display: flex;
+        position: absolute;
+        bottom: 30px;
+        width: 100%;
+        .ant-btn{
+            width: 80%;
+            margin-left: auto;
+            margin-right: auto;
+            background: @color-black;
+            color: @color-text;
+            font-size: @size-16;
+            font-weight: @font-weight-medium;
+            line-height: 23.44px;
+            &:hover {
+               background: @color-black;
+                color: @color-text; 
+                border-color: unset;
+            }
+        }
+    }
+}
