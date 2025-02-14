@@ -32,9 +32,10 @@ CORS(app, resources={r"/*": {"origins": "http://localhost:3000"}})
 socketio = SocketIO(app, cors_allowed_origins="http://localhost:3000")
 
 # socketio = SocketIO(app, cors_allowed_origins="http://localhost:5173")
+keyLengthDH = 1024
 
-serverDH = ct.gen_server_DH()
-clientDH = ct.gen_client_DH()
+serverDH = ct.gen_server_DH(keyLengthDH)
+clientDH = ct.gen_client_DH(keyLengthDH)
 
 
 
@@ -82,6 +83,57 @@ useDHKey = False
 useECCKey = False
 serverSecret = 0
 
+@socketio.on('changeKeyLengthDH')
+def changeKeyLengthDH(length):
+    global keyLengthDH
+    global serverDH
+    global clientDH
+    keyLengthDH = length
+    serverDH = ct.gen_server_DH(int(length))
+    clientDH = ct.gen_client_DH(int(length))
+    return {"success": True, "result": keyLengthDH}
+
+@socketio.on('changeMode')
+def changeMode(mode):
+    global sendUsingPrivate
+    global sendUsingDH
+    global sendUsingECC
+    global skipEncryption
+    global ciphertext
+
+    global useClientPKI
+    global useDHKey
+    global useECCKey
+    global serverSecret
+
+    if mode == 'addDH':
+        sendUsingDH = True
+        useDHKey = True
+        serverSecret = get_dh_server_sharedkey()
+    if mode == 'rmDH': 
+        sendUsingDH = False
+        useDHKey = False
+        skipEncryption = True
+    if mode == 'addECC':
+        sendUsingECC = True
+        useECCKey = True
+    if mode == 'rmECC':
+        sendUsingECC = False
+        useECCKey = False
+        skipEncryption = True
+    if mode == 'addRSA':
+        sendUsingPrivate = True
+        useClientPKI = True
+    if mode == 'rmRSA':
+        sendUsingPrivate = False
+        useClientPKI = False
+        skipEncryption = True
+
+    print("RSA", sendUsingPrivate, useClientPKI)
+    print("ECC", sendUsingECC, useECCKey)
+    print("DH", sendUsingDH, useDHKey)
+    return {"success": True, "result": mode}
+
 @socketio.on('turnon')
 def handle_turn_on(data):
     print(data)
@@ -105,51 +157,52 @@ def handle_message(message):
 
         clientSecret = get_dh_sharedkey()
         
-        result = ct.check_client_command(data)
-        if data == b'exit':
-            os._exit(0)
-        if result == 0:
-            os._exit(0)
-        if result == 10:
-            sendUsingPrivate = False
-        if result == 11:
-            sendUsingPrivate = True
-            skipEncryption = True
-        if result == 20:
-            sendUsingDH = False
-        if result == 21:
-            sendUsingDH = True
-            skipEncryption = True
-        if result == 14:
-            sendUsingECC = True
-            skipEncryption = True
-        if result == 15:
-            sendUsingECC = False
-
-        ciphertext = encrypt(data, sendUsingPrivate, sendUsingDH, sendUsingECC, clientSecret)
-        print("ciphertext", ciphertext)
+        # result = ct.check_client_command(data)
+        # if data == b'exit':
+        #     os._exit(0)
+        # if result == 0:
+        #     os._exit(0)
+        # if result == 10:
+        #     sendUsingPrivate = False
+        # if result == 11:
+        #     sendUsingPrivate = True
+        #     skipEncryption = True
+        # if result == 20:
+        #     sendUsingDH = False
+        # if result == 21:
+        #     sendUsingDH = True
+        #     skipEncryption = True
+        # if result == 14:
+        #     sendUsingECC = True
+        #     skipEncryption = True
+        # if result == 15:
+        #     sendUsingECC = False
+        print("data", data)
         if skipEncryption:
             ciphertext = data
             skipEncryption = False
+        else:
+            ciphertext = encrypt(data, sendUsingPrivate, sendUsingDH, sendUsingECC, clientSecret)
 
+        print("ciphertext", ciphertext)
         plaintext = decrypt(ciphertext, useClientPKI, useDHKey, useECCKey, serverSecret)
-        print("plaintext_descrypt", plaintext)
-        result = ct.check_server_command(plaintext)
-        print("nhi", result)
-        if result == 10:  # encryption has been disabled so no message
-            plaintext = b'PKI Encryption disabled!'
-        elif result == 11:  # encryption enabled
-            plaintext = b'PKI Encryption enabled!'
-            print("Client Certificate found")
-        elif result == 20:  # dh enabled
-            clientKey = plaintext
-            plaintext = b'Diffie-Hellman disabled!'
-        elif result == 21:  # encryption enabled
-            plaintext = b'Diffie-Hellman enabled!'
-        elif result == 14:
-            plaintext = b'ECC Encryption enabled!'
-        elif result == 15:
-            plaintext = b'ECC Encryption disabled!'
+        # print("plaintext_descrypt", plaintext)
+        # result = ct.check_server_command(plaintext)
+        # print("nhi", result)
+        # if result == 10:  # encryption has been disabled so no message
+        #     plaintext = b'PKI Encryption disabled!'
+        # elif result == 11:  # encryption enabled
+        #     plaintext = b'PKI Encryption enabled!'
+        #     print("Client Certificate found")
+        # elif result == 20:  # dh enabled
+        #     clientKey = plaintext
+        #     plaintext = b'Diffie-Hellman disabled!'
+        # elif result == 21:  # encryption enabled
+        #     plaintext = b'Diffie-Hellman enabled!'
+        # elif result == 14:
+        #     plaintext = b'ECC Encryption enabled!'
+        # elif result == 15:
+        #     plaintext = b'ECC Encryption disabled!'
 
         print("dd", plaintext)
         # if (result == 14 or result == 15):
@@ -161,37 +214,41 @@ def handle_message(message):
         # }
         # print("msg", msg)
         msg = plaintext.decode('utf-8') 
-        if result == 0:
-            os._exit(0)
-        if result == 10:
-            useClientPKI = False
-        if result == 11:
-            useClientPKI = True
-            print("Client certificate found ...")
-        if result == 20:
-            useDHKey = False
-        if result == 21:
-            useDHKey = True
-            print("DH Key Exchange ...")
-            serverSecret = get_dh_server_sharedkey()
-        if result == 14:
-            useECCKey = True
-            print("ECC Key ...")
-        if result == 15:
-            useECCKey = False
-        if useClientPKI == True or useDHKey == True or useECCKey == True:
-            print(msg)
-        else:
-            print(msg)
+        # if result == 0:
+        #     os._exit(0)
+        # if result == 10:
+        #     useClientPKI = False
+        # if result == 11:
+        #     useClientPKI = True
+        #     print("Client certificate found ...")
+        # if result == 20:
+        #     useDHKey = False
+        # if result == 21:
+        #     useDHKey = True
+        #     print("DH Key Exchange ...")
+        #     serverSecret = get_dh_server_sharedkey()
+        # if result == 14:
+        #     useECCKey = True
+        #     print("ECC Key ...")
+        # if result == 15:
+        #     useECCKey = False
+        # if useClientPKI == True or useDHKey == True or useECCKey == True:
+        #     print(msg)
+        # else:
+        #     print(msg)
 
-        results.append({
-            "msg": msg,
-            "result": result
-        })
-        print("results", results)
+        results.append(msg)
 
-        socketio.emit('messageFromServer', results)
-        return {"success": True, "message": msg}
+        # Convert each string to a valid dictionary
+        converted_data = [json.loads(d.replace("'", '"')) for d in results]
+
+        # Convert back to a valid JSON array (optional)
+        json_output = json.dumps(converted_data, indent=4)
+
+        print("results", json_output)
+
+        socketio.emit('messageFromServer', json_output)
+        return {"success": True, "message": json_output}
     except Exception as e:
         return {"success": False, "error": str(e)}
 if __name__ == '__main__':

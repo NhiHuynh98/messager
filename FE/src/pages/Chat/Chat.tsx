@@ -4,10 +4,19 @@ import {
   faImage,
   faPaperPlane,
   faPaperclip,
-  faTableColumns,
+  faTableColumns
 } from "@fortawesome/free-solid-svg-icons";
 
-import { Avatar, Flex } from "antd";
+import {
+  Avatar,
+  Button,
+  Flex,
+  Radio,
+  RadioChangeEvent,
+  Select,
+  Switch,
+  Typography
+} from "antd";
 
 import "./Chat.less";
 import { UserOutlined } from "@ant-design/icons";
@@ -15,61 +24,63 @@ import { faFile } from "@fortawesome/free-regular-svg-icons";
 import { Input } from "../../components";
 import { AppDispatch, RootState } from "../../redux/store";
 import { useDispatch, useSelector } from "react-redux";
-import { Message, createMessage } from "../../redux/message";
+import { Message, changeMode, createMessage, changeKeyLengthDH } from "../../redux/message";
 
 import { io } from "socket.io-client";
+const { Title } = Typography;
 
 const Chat = () => {
   const socket = io("http://localhost:5000");
 
   const dispatch: AppDispatch = useDispatch();
-  const { messages } = useSelector(
-    (state: RootState) => state.messages
-  );
+  const { messages, keyLengthDH } = useSelector((state: RootState) => state.messages);
 
   const [newMessage, setNewMessage] = useState("");
+  const [msg, setMsg] = useState<Message[]>([]);
 
   const handleSendMessage = (e) => {
-      e.preventDefault();
-      if (newMessage.trim()) {
-        let newMess: Message = {
-          ...messages,
-          id: Date.now(),
-          content: {
-            body: {
-              text: newMessage,
-              type: "TEXT",
-            },
-          },
-          sender: "bot",
-          destinations: {
-            to: "user",
-          },
-          replace: function (arg0: RegExp, arg1: string): string {
-            throw new Error("Function not implemented.");
+    e.preventDefault();
+    if (newMessage.trim()) {
+      let newMess: any = {
+        id: Date.now(),
+        content: {
+          body: {
+            text: newMessage,
+            type: "TEXT"
           }
-        };
-        dispatch(createMessage(newMess))
+        },
+        sender: "bot",
+        destinations: {
+          to: "user"
+        },
+        replace: function (arg0: RegExp, arg1: string): string {
+          throw new Error("Function not implemented.");
+        }
+      };
+      console.log("newMess", newMess);
+      setNewMessage('');
+      dispatch(createMessage(newMess))
         .unwrap()
         .then((message) => {
+          setMsg(message);
           console.log("Message sent successfully:", message);
         })
         .catch((error) => {
           console.error("Failed to send message:", error);
         });
-      }
+    }
 
-      // socket.on('messageFromServer', (data) => {
-      //   console.log("message", data)
-  
-      //   // setReceivedMsg(data)
-      //   // setMessage('')
-      //   // socket.off('messageFromServer');
-      // });
-    
-      return () => {
-        socket.disconnect();
-      };
+    // socket.on('messageFromServer', (data) => {
+    //   console.log("message", data)
+
+    //   // setReceivedMsg(data)
+    //   // setMessage('')
+    //   // socket.off('messageFromServer');
+    // });
+
+    return () => {
+      socket.disconnect();
+    };
   };
 
   const handleKeyDown = (e) => {
@@ -84,12 +95,65 @@ const Chat = () => {
     setIsExpanded(!isExpanded);
   };
 
+  const [DH, setDH] = useState(false);
+
+  const onChangeDH = (checked: boolean) => {
+    setDH(checked);
+    dispatch(changeMode(checked ? "addDH" : "rmDH"))
+      .unwrap()
+      .then((mode) => {
+        console.log("Mode changed successfully:", mode);
+      })
+      .catch((error) => {
+        console.error("Failed to change mode:", error);
+      });
+  };
+
+  const [RSA, setRSA] = useState(false);
+
+  const onChangeRSA = (checked: boolean) => {
+    setRSA(checked);
+    dispatch(changeMode(checked ? "addRSA" : "rmRSA"))
+      .unwrap()
+      .then((mode) => {
+        console.log("Mode changed successfully:", mode);
+      })
+      .catch((error) => {
+        console.error("Failed to change mode:", error);
+      });
+  };
+
+  const [ECC, setECC] = useState(false);
+
+  const onChangeECC = (checked: boolean) => {
+    setECC(checked);
+    dispatch(changeMode(checked ? "addECC" : "rmECC"))
+      .unwrap()
+      .then((mode) => {
+        console.log("Mode changed successfully:", mode);
+      })
+      .catch((error) => {
+        console.error("Failed to change mode:", error);
+      });
+  };
+
+  const [valueAutoDelete, setAutoDelete] = useState("Off");
+  const onAutoDelete = (e: RadioChangeEvent) => {
+    setAutoDelete(e.target.value);
+  };
+
+  const hdKeyLengthDH = (value) => {
+    dispatch(changeKeyLengthDH(value))
+      .unwrap()
+      .then((keyLength) => {
+        console.log("Key length changed successfully:", keyLength);
+      })
+      .catch((error) => {
+        console.error("Failed to change key length:", error);
+      });
+  };
+
   console.log("message", messages);
-
-  const arrayOfObjects = messages.map((mess) =>
-    JSON.parse(mess?.replace(/'/g, '"'))
-  );
-
   return (
     <div className="specific-chat">
       <Flex
@@ -119,15 +183,18 @@ const Chat = () => {
           </Flex>
           <div className="chat-box">
             <div className="chat-messages">
-              {arrayOfObjects.map((mess) => (
+              {msg.map((mess) => (
                 <div
-                  className={`chat-message ${mess.content} ${mess?.sender === "user" ? "user" : "bot"}`}
+                  key={mess.id}
+                  className={`chat-message ${mess.sender === "user" ? "user" : "bot"}`}
+                  data-id={mess.id}
                 >
                   <Avatar size={35} icon={<UserOutlined />} />
-                  <div key={mess?.id}>{mess?.content?.body?.text}</div>
+                  <div>{mess?.content?.body?.text}</div>
                 </div>
               ))}
             </div>
+
             <div className="chat-input">
               <Input
                 placeholder="Write a message"
@@ -160,12 +227,105 @@ const Chat = () => {
               <div className="main">Dialog Storage Item</div>
               <div className="sub">Document Sharing</div>
             </div>
+            <Flex vertical gap="middle" style={{ padding: 15 }}>
+              <Flex vertical gap="small">
+                <Title level={5}>End to end encryption</Title>
+                <Flex vertical gap="middle" style={{ padding: 10 }}>
+                  <Flex justify="space-between">
+                    <Typography>Use DH:</Typography>
+                    <Switch value={DH} onChange={onChangeDH} />
+                  </Flex>
+                  {DH && (
+                    <Flex gap="small" align="center" justify="space-between">
+                      <Typography>Key Length: </Typography>
+                      <Select
+                        defaultValue="1024"
+                        style={{ width: 120 }}
+                        onChange={hdKeyLengthDH}
+                        value={keyLengthDH}
+                        options={[
+                          { value: "1024", label: "1024" },
+                          { value: "4096", label: "4096" }
+                        ]}
+                      />
+                    </Flex>
+                  )}
 
-            <Flex vertical gap="small" style={{ padding: 10, width: 120 }}>
+                  <Flex justify="space-between">
+                    <Typography>Use RSA:</Typography>
+                    <Switch value={RSA} onChange={onChangeRSA} />
+                  </Flex>
+
+                  {RSA && (
+                    <Flex gap="small" align="center" justify="space-between">
+                      <Typography>Key Length: </Typography>
+                      <Select
+                        defaultValue="1024"
+                        style={{ width: 120 }}
+                        onChange={hdKeyLength}
+                        options={[
+                          { value: "1024", label: "1024" },
+                          { value: "4096", label: "4096" }
+                        ]}
+                      />
+                    </Flex>
+                  )}
+
+                  <Flex justify="space-between">
+                    <Typography>Use ECC:</Typography>
+                    <Switch value={ECC} onChange={onChangeECC} />
+                  </Flex>
+
+                  {ECC && (
+                    <Flex gap="small" align="center" justify="space-between">
+                      <Typography>Key Length: </Typography>
+                      <Select
+                        defaultValue="1024"
+                        style={{ width: 120 }}
+                        onChange={hdKeyLength}
+                        options={[
+                          { value: "1024", label: "1024" },
+                          { value: "4096", label: "4096" }
+                        ]}
+                      />
+                    </Flex>
+                  )}
+                </Flex>
+
+                <Button color="danger" variant="outlined">
+                  Analytic
+                </Button>
+              </Flex>
+
+              <Flex vertical gap="middle">
+                <Title level={5}> Auto Delete </Title>
+                <Radio.Group
+                  onChange={onAutoDelete}
+                  value={valueAutoDelete}
+                  options={[
+                    {
+                      label: "Off",
+                      value: "Off"
+                    },
+                    {
+                      label: "After 1 week",
+                      value: "After 1 week"
+                    },
+                    {
+                      label: "After 1 month",
+                      value: "After 1 month"
+                    }
+                  ]}
+                ></Radio.Group>
+                <Typography> Set custom time</Typography>
+              </Flex>
+
+              {/* <Flex vertical gap="small" style={{ padding: 10, width: 120 }}>
               <Flex className="document" align="center" justify="center">
                 <FontAwesomeIcon icon={faFile} fontSize="35px" />
               </Flex>
               <span style={{ textAlign: "center" }}>Invoice.pdf</span>
+            </Flex> */}
             </Flex>
           </Flex>
         )}
