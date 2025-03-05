@@ -82,6 +82,8 @@ useClientPKI = False
 useDHKey = False
 useECCKey = False
 serverSecret = 0
+generate_ecc = ''
+generate_rsa = ''
 
 @socketio.on('changeKeyLengthDH')
 def changeKeyLengthDH(length):
@@ -92,6 +94,24 @@ def changeKeyLengthDH(length):
     serverDH = ct.gen_server_DH(int(length))
     clientDH = ct.gen_client_DH(int(length))
     return {"success": True, "result": keyLengthDH}
+
+
+@socketio.on('changeKeyLengthECC')
+def changeKeyLengthECC(length):
+    global keyLengthECC
+    global generate_ecc
+    keyLengthECC = length
+    generate_ecc = ct.gen_ecc_certs(int(length))
+    return {"success": True, "result": keyLengthECC}
+
+@socketio.on('changeKeyLengthRSA')
+def changeKeyLengthRSA(length):
+    global keyLengthRSA
+    global generate_rsa
+    keyLengthRSA = length
+    generate_rsa = ct.gen_rsa_certs(int(length))
+    return {"success": True, "result": keyLengthRSA}
+
 
 @socketio.on('changeMode')
 def changeMode(mode):

@@ -27,6 +27,8 @@ interface MessageState {
   error: string | null;
   mode: string | null;
   keyLengthDH: string | null;
+  keyLengthECC: string | null;
+  keyLengthRSA: string | null;
 }
 
 const initialState: MessageState = {
@@ -34,7 +36,9 @@ const initialState: MessageState = {
   loading: false,
   error: null,
   mode: null,
-  keyLengthDH: "1024"
+  keyLengthDH: "1024",
+  keyLengthECC: "P-256",
+  keyLengthRSA: "1024"
 };
 
 export const fetchMessages = createAsyncThunk<Message[]>(
@@ -102,6 +106,44 @@ export const changeKeyLengthDH = createAsyncThunk<string, string>(
   }
 );
 
+export const changeKeyLengthECC = createAsyncThunk<string, string>(
+  "app/changeKeyLengthECC",
+  async (mode) => {
+    return new Promise<string>((resolve, reject) => {
+      socket.emit(
+        "changeKeyLengthECC",
+        mode,
+        (response: { success: boolean; result?: string; error?: string }) => {
+          if (response.success && response.result) {
+            resolve(response.result);
+          } else {
+            reject(response.error || "Failed to change length");
+          }
+        }
+      );
+    });
+  }
+);
+
+export const changeKeyLengthRSA = createAsyncThunk<string, string>(
+  "app/changeKeyLengthRSA",
+  async (mode) => {
+    return new Promise<string>((resolve, reject) => {
+      socket.emit(
+        "changeKeyLengthRSA",
+        mode,
+        (response: { success: boolean; result?: string; error?: string }) => {
+          if (response.success && response.result) {
+            resolve(response.result);
+          } else {
+            reject(response.error || "Failed to change length");
+          }
+        }
+      );
+    });
+  }
+);
+
 const messageSlice = createSlice({
   name: "messages",
   initialState,
@@ -131,8 +173,26 @@ const messageSlice = createSlice({
       .addCase(changeMode.fulfilled, (state, action: PayloadAction<string>) => {
         state.mode = action.payload;
       })
+      .addCase(changeKeyLengthDH.pending, (state) => {
+        state.loading = true;
+      })
       .addCase(changeKeyLengthDH.fulfilled, (state, action: PayloadAction<string>) => {
         state.keyLengthDH = action.payload;
+        state.loading = false;
+      })
+      .addCase(changeKeyLengthECC.pending, (state) => {
+        state.loading = true;
+      })
+      .addCase(changeKeyLengthECC.fulfilled, (state, action: PayloadAction<string>) => {
+        state.keyLengthECC = action.payload;
+        state.loading = false;
+      })
+      .addCase(changeKeyLengthRSA.pending, (state) => {
+        state.loading = true;
+      })
+      .addCase(changeKeyLengthRSA.fulfilled, (state, action: PayloadAction<string>) => {
+        state.keyLengthRSA = action.payload;
+        state.loading = false;
       })
   }
 });

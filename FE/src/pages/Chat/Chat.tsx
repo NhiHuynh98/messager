@@ -14,6 +14,7 @@ import {
   Radio,
   RadioChangeEvent,
   Select,
+  Spin,
   Switch,
   Typography
 } from "antd";
@@ -24,7 +25,7 @@ import { faFile } from "@fortawesome/free-regular-svg-icons";
 import { Input } from "../../components";
 import { AppDispatch, RootState } from "../../redux/store";
 import { useDispatch, useSelector } from "react-redux";
-import { Message, changeMode, createMessage, changeKeyLengthDH } from "../../redux/message";
+import { Message, changeMode, createMessage, changeKeyLengthDH, changeKeyLengthECC, changeKeyLengthRSA } from "../../redux/message";
 
 import { io } from "socket.io-client";
 const { Title } = Typography;
@@ -33,7 +34,7 @@ const Chat = () => {
   const socket = io("http://localhost:5000");
 
   const dispatch: AppDispatch = useDispatch();
-  const { messages, keyLengthDH } = useSelector((state: RootState) => state.messages);
+  const { messages, keyLengthDH, keyLengthECC, loading } = useSelector((state: RootState) => state.messages);
 
   const [newMessage, setNewMessage] = useState("");
   const [msg, setMsg] = useState<Message[]>([]);
@@ -153,9 +154,33 @@ const Chat = () => {
       });
   };
 
+  const hdKeyLengthECC = (value) => {
+    dispatch(changeKeyLengthECC(value))
+    .unwrap()
+    .then((keyLength) => {
+      console.log("Key length changed successfully:", keyLength);
+    })
+    .catch((error) => {
+      console.error("Failed to change key length:", error);
+    });
+  }
+
+  const hdKeyLengthRSA = (value) => {
+    dispatch(changeKeyLengthRSA(value))
+    .unwrap()
+    .then((keyLength) => {
+      console.log("Key length changed successfully:", keyLength);
+    })
+    .catch((error) => {
+      console.error("Failed to change key length:", error);
+    });
+  }
+
   console.log("message", messages);
   return (
     <div className="specific-chat">
+      <Spin spinning={loading} percent="auto" fullscreen />
+
       <Flex
         className="chat-body"
         gap="middle"
@@ -245,7 +270,10 @@ const Chat = () => {
                         value={keyLengthDH}
                         options={[
                           { value: "1024", label: "1024" },
-                          { value: "4096", label: "4096" }
+                          { value: "2048", label: "2048" },
+                          { value: "3072", label: "3072" },
+                          { value: "4096", label: "4096" },
+                          { value: "8192", label: "8192" }
                         ]}
                       />
                     </Flex>
@@ -262,10 +290,13 @@ const Chat = () => {
                       <Select
                         defaultValue="1024"
                         style={{ width: 120 }}
-                        onChange={hdKeyLength}
+                        onChange={hdKeyLengthRSA}
                         options={[
                           { value: "1024", label: "1024" },
-                          { value: "4096", label: "4096" }
+                          { value: "2048", label: "2048" },
+                          { value: "3072", label: "3072" },
+                          { value: "4096", label: "4096" },
+                          { value: "8192", label: "8192" }
                         ]}
                       />
                     </Flex>
@@ -280,12 +311,15 @@ const Chat = () => {
                     <Flex gap="small" align="center" justify="space-between">
                       <Typography>Key Length: </Typography>
                       <Select
-                        defaultValue="1024"
+                        defaultValue="P-256"
+                        value={keyLengthECC}
                         style={{ width: 120 }}
-                        onChange={hdKeyLength}
+                        onChange={hdKeyLengthECC}
                         options={[
-                          { value: "1024", label: "1024" },
-                          { value: "4096", label: "4096" }
+                          { value: "P-192", label: "P-192" },
+                          { value: "P-233", label: "P-233" },
+                          { value: "P-224", label: "P-224" },
+                          { value: "P-256", label: "P-256" }
                         ]}
                       />
                     </Flex>

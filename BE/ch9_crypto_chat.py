@@ -53,8 +53,8 @@ def remove_dh_certs():
 # generate Diffie-Hellman certificates for client
 
 
-def gen_client_DH():
-    clientDH = dh.DiffieHellman(2, 17, 1024)
+def gen_client_DH(keyLength = 1024):
+    clientDH = dh.DiffieHellman(2, 17, keyLength)
     privateKey = str(clientDH.privateKey).encode()
     fd = open("client_private_dh_key.pem", "wb")
     fd.write(privateKey)
@@ -69,8 +69,8 @@ def gen_client_DH():
 # generate Diffie-Hellman certificates for server
 
 
-def gen_server_DH():
-    svrDH = dh.DiffieHellman(2, 17, 1024)
+def gen_server_DH(keyLength = 1024):
+    svrDH = dh.DiffieHellman(2, 17, keyLength)
     privateKey = str(svrDH.privateKey).encode()
     fd = open("server_private_dh_key.pem", "wb")
     fd.write(privateKey)
@@ -182,7 +182,7 @@ def encrypt_ecc(msg):
     ciphertextPubKey = ciphertextPrivKey * curve.g
     return (my_dict['ciphertext'], my_dict['nonce'], my_dict['tag'], ciphertextPubKey)
 
-def gen_ecc_certs():
+def gen_ecc_certs(length="P-256"):
     # key = ECC.generate(curve='P-256')
     # f = open('myprivatekey.pem','wt')
     # f.write(key.export_key(format='PEM'))
@@ -190,7 +190,7 @@ def gen_ecc_certs():
     # f = open('myprivatekey.pem','rt')
     # key = ECC.import_key(f.read())
     # print (key)
-    key = ECC.generate(curve='P-256') #3072 RSA 
+    key = ECC.generate(curve=length) #3072 RSA 
     private_key = key.export_key(format='PEM')
     f = open('ecc_private_key.pem','wt')
     f.write(private_key)
@@ -263,9 +263,9 @@ def decrypt_AES_CTR(msg, secretKey):
     return plaintext
 
 
-def gen_rsa_certs():
+def gen_rsa_certs(keyLength = 4096):
     # Generate a public/private key pair using 4096 bits key length (512bytes)
-    new_key = RSA.generate(4096, e=65537)
+    new_key = RSA.generate(keyLength, e=65537)
     print("newkey", new_key)
     # The private key in PEM format
     private_key = new_key.exportKey("PEM")
